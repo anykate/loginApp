@@ -8,5 +8,6 @@
 {% block content %}
   <div class="container">
     <h1>Welcome {{ user.first_name}}!</h1>
+    <a href="javascript:void(0)" onclick="location.href='{% url 'loginRegApp:logoutuser' %}'" class="mt-4 btn btn-primary">Logout</a>
   </div>
 {% endblock %}

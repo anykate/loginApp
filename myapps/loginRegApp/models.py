@@ -37,7 +37,28 @@ class UserManager(models.Manager):
         return errors
 
     def login_validator(self, post_data):
-        pass
+        errors = {}
+        user = None
+
+        # Email REGEX: ^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$
+        EMAIL_REGEX = re.compile(
+            r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$'
+        )
+
+        if len(post_data['email_login']) < 1:
+            errors['email'] = 'Email is required'
+        elif not EMAIL_REGEX.match(post_data['email_login']):
+            errors['email_pattern'] = 'Invalid Email Address'
+        else:
+            user = User.objects.filter(email=post_data['email_login']).first()
+            if not user:
+                errors['user_found'] = 'No user found with this email address - Please register'
+
+        if len(post_data['pwd_login']) < 8:
+            errors['pwd'] = 'Password is required and should be at least 8 characters long'
+
+        # print(errors)
+        return errors
 
 
 class User(models.Model):
