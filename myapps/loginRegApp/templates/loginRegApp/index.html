@@ -1,0 +1,52 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}
+  LoginRegApp | Home
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Registration</h1>
+        <form action="{% url 'loginRegApp:createuser' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="email" id="email" placeholder="Email Address" readonly="readonly" onfocus="javascript:this.removeAttribute('readonly')">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="c_pwd" id="c_pwd" placeholder="Confirm Password">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Register" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <h1>Login</h1>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" name="email_login" id="email_login" placeholder="Email Address" readonly="readonly" onfocus="javascript:this.removeAttribute('readonly')">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="pwd_login" id="pwd_login" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
